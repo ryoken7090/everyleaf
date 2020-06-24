@@ -18,7 +18,8 @@ DICカリキュラム就職タームの万葉課題です。
 - ruby 2.6.5
 - Rails 5.2.4.3
 - PostgreSQL 12.2
+
 # テーブル
 ## taskテーブル
 - title : string
-- content : text 
+- content : text
