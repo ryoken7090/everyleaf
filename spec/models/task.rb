@@ -12,5 +12,4 @@ RSpec.describe 'タスク管理機能', type: :model do
     task = Task.new(title: 'タイトル内容あり', content: 'コンテント内湯あり')
     expect(task).to be_valid
   end
-
 end

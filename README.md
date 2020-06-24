@@ -23,3 +23,27 @@ DICカリキュラム就職タームの万葉課題です。
 ## taskテーブル
 - title : string
 - content : text
+
+# herokuにデプロイする
+- herokuにログインする  
+`$heroku login`
+
+- アセットプリコンパイルをする  
+`$ rails assets:precompile RAILS_ENV=production`
+
+- コミットする  
+`$ git add .`  
+`$ git commit -m "<コミットメッセージ>"`
+
+- Herokuにアプリケーションを作成  
+`$heroku create`
+
+- Herokuにデプロイをする  
+`$ git push heroku master`
+
+- データベースの移行  
+`$heroku run rails db:migrate`
+
+- アプリケーションにアクセスする  
+Herokuアプリのアドレスはhttps://アプリ名.herokuapp.com/のように設定されている。なお、
+`$ heroku config` で一行目にアプリ名が表示される。
