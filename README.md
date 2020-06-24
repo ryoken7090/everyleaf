@@ -1,24 +1,25 @@
-# README
+# el_app
+DICカリキュラム就職タームの万葉課題です。
+タスクを管理するアプリを作成します。
+# 概要
+- 自分のタスクを簡単に登録したい
+- タスクに終了期限を設定できるようにしたい
+- タスクに優先順位をつけたい
+- ステータス（未着手・着手・完了）を管理したい
+- ステータスでタスクを絞り込みたい
+- タスク名などで指定のタスクを検索したい
+- タスクを一覧したい。一覧画面で（優先順位、終了期限などを元にして）ソートしたい
+- タスクにラベルなどをつけて分類したい
+- ユーザ登録し、自分が登録したタスクだけを見られるようにしたい
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+これらの要件を満たすアプリを作ります。
 
-Things you may want to cover:
+# 環境
+- ruby 2.6.5
+- Rails 5.2.4.3
+- PostgreSQL 12.2
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# テーブル
+## taskテーブル
+- title : string
+- content : text
