@@ -20,6 +20,14 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(task_list[2]).to have_content 'Factoryで作ったデフォルトのコンテント1'
       end
     end
+    context '終了期限でソートするリンクを押した場合' do
+      it '終了時刻の遅いタスクが後ろに並んでいる' do
+        FactoryBot.create(:task, expired_at: '2020-08-01')
+        visit tasks_path(sort_expired: "true")
+        task_list = all('.task_row')
+        expect(task_list[2]).to have_content '2020年08月01日'
+      end
+    end
   end
   describe 'タスク登録画面' do
     context '必要項目を入力して、createボタンを押した場合' do
