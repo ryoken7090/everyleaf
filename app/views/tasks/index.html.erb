@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Tasks</h1>
+<p><%= link_to '終了期限の近い順', tasks_path(sort_expired: "true") %></p>
+<p><%= link_to 'タスクの新しい順', tasks_path %></p>
 
 <table>
   <thead>
