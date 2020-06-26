@@ -35,8 +35,13 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         fill_in 'タイトル', with: '入力したタイトル'
         fill_in '内容', with: '入力したコンテンツ'
-        click_button 'Submit'
+        select '2020', from: 'task_expired_at_1i'
+        select '9月', from: 'task_expired_at_2i'
+        select '1', from: 'task_expired_at_3i'
+        click_button '送信'
         expect(page).to have_content '入力したタイトル'
+        expect(page).to have_content '2020年09月01日'
+
       end
     end
   end
