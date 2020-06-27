@@ -4,6 +4,12 @@
 <p><%= link_to '終了期限の近い順', tasks_path(sort_expired: "true") %></p>
 <p><%= link_to 'タスクの新しい順', tasks_path %></p>
 
+<%= form_with(scope: :search, url: tasks_path, method: :get, local: true) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.submit('検索')%>
+<% end %>
+
 <table>
   <thead>
     <tr>

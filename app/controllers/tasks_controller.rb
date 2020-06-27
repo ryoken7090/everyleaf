@@ -3,10 +3,14 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
+    # binding.pry
     if params[:sort_expired]
       @tasks = Task.all.order(expired_at: "ASC")
     else
       @tasks = Task.all.order(created_at: "DESC")
+    end
+    if params[:search]
+      @tasks = Task.all.search(params[:search][:title])
     end
   end
 
