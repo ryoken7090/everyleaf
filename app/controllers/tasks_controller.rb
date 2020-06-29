@@ -9,8 +9,13 @@ class TasksController < ApplicationController
     else
       @tasks = Task.all.order(created_at: "DESC")
     end
-    if params[:search]
-      @tasks = Task.all.search(params[:search][:title])
+
+    if params[:title_search]
+      @tasks = Task.all.title_search(params[:title_search][:title])
+    end
+
+    if params[:status_search]
+      @tasks = Task.all.status_search(params[:status_search][:status])
     end
   end
 
