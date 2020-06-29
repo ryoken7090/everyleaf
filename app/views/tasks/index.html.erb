@@ -4,21 +4,19 @@
 <p><%= link_to '終了期限の近い順', tasks_path(sort_expired: "true") %></p>
 <p><%= link_to 'タスクの新しい順', tasks_path %></p>
 
-<%= form_with(scope: :title_search, url: tasks_path, method: :get, local: true) do |f| %>
+<%= form_with(url: tasks_path, method: :get, local: true) do |f| %>
   <div class="field">
     <%= f.label :title, "タイトル検索" %>
     <%= f.text_field :title %>
   </div>
-  <%= f.submit('検索')%>
-<% end %>
-
-<%= form_with(scope: :status_search, url: tasks_path, method: :get, local: true) do |f| %>
   <div class="field">
     <%= f.label :status, "ステータスで検索" %>
-    <%= f.select :status, [["未着手","yet"],["着手中","working"],["完了","completed"]] %>
+    <%= f.select :status, [["未着手","yet"],["着手中","working"],["完了","completed"]], { include_blank: '選択なし' } %>
   </div>
   <%= f.submit('検索')%>
 <% end %>
+
+
 
 <table>
   <thead>
