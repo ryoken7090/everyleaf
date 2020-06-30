@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.page(params[:page]).per(PER)
     if params[:sort_expired]
-      @tasks = @tasks.order(expired_at: "DESC")
+      @tasks = @tasks.order(expired_at: "ASC")
     end
 
     if params[:sort_priority]
