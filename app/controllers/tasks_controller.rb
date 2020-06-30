@@ -5,7 +5,11 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
     if params[:sort_expired]
-      @tasks = @tasks.order(expired_at: "ASC")
+      @tasks = @tasks.order(expired_at: "DESC")
+    end
+
+    if params[:sort_priority]
+      @tasks = @tasks.order(priority: "DESC")
     end
 
     if params[:title].present? && params[:status].present?
