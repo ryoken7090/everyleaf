@@ -1,9 +1,25 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
+  PER  = 10
   # GET /tasks
   def index
-    @tasks = Task.all.order(created_at: "DESC")
+    @tasks = Task.page(params[:page]).per(PER)
+    if params[:sort_expired]
+      @tasks = @tasks.order(expired_at: "ASC")
+    end
+
+    if params[:sort_priority]
+      @tasks = @tasks.order(priority: "DESC")
+    end
+
+    if params[:title].present? && params[:status].present?
+      @tasks = @tasks.title_search(params[:title]).status_search(params[:status])
+    elsif params[:title].present?
+      @tasks = @tasks.title_search(params[:title])
+    elsif params[:status].present?
+      @tasks = @tasks.status_search(params[:status])
+    end
   end
 
   # GET /tasks/1
@@ -22,9 +38,8 @@ class TasksController < ApplicationController
   # POST /tasks
   def create
     @task = Task.new(task_params)
-
     if @task.save
-      redirect_to @task, notice: 'Task was successfully created.'
+      redirect_to @task, notice: 'タスクが生成されました'
     else
       render :new
     end
@@ -33,7 +48,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   def update
     if @task.update(task_params)
-      redirect_to @task, notice: 'Task was successfully updated.'
+      redirect_to @task, notice: '更新しました'
     else
       render :edit
     end
@@ -42,7 +57,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   def destroy
     @task.destroy
-    redirect_to tasks_url, notice: 'Task was successfully destroyed.'
+    redirect_to tasks_url, notice: 'タスクを消去しました'
   end
 
   private
@@ -53,6 +68,6 @@ class TasksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:title, :content)
+      params.require(:task).permit(:title, :content, :expired_at, :status, :priority)
     end
 end

@@ -1,14 +1,29 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
+  <strong>タイトル:</strong>
   <%= @task.title %>
 </p>
 
 <p>
-  <strong>Content:</strong>
+  <strong>内容:</strong>
   <%= @task.content %>
 </p>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+<p>
+  <strong>終了時刻:</strong>
+  <%= @task.expired_at.strftime("%Y年%m月%d日") %>
+</p>
+
+<p>
+  <strong>ステータス:</strong>
+  <%= @task.status %>
+</p>
+
+<p>
+  <strong>優先度:</strong>
+  <%= @task.priority %>
+</p>
+
+<%= link_to '編集', edit_task_path(@task) %> |
+<%= link_to '一覧', tasks_path %>

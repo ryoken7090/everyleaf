@@ -14,6 +14,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   gem 'factory_bot_rails'
   gem 'dotenv-rails'
+  gem 'pry-rails'
+  gem 'better_errors'
 end
 group :development do
   gem 'web-console', '>= 3.3.0'
@@ -28,3 +30,7 @@ group :test do
 end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rails-i18n', '~> 5.1'
+gem 'enum_help'
+gem 'kaminari', '~> 0.17.0'
+gem 'bootstrap', '~> 4.4.1'
+gem 'jquery-rails'

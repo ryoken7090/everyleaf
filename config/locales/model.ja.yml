@@ -6,3 +6,12 @@ ja:
       task:
         title: タイトル
         content: 内容
+        expired_at: 終了期限
+        status: ステータス
+        priority: 優先度
+  enums:
+    task:
+      priority:
+        high: 高
+        middle: 中
+        low: 低

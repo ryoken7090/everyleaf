@@ -21,7 +21,22 @@
     <%= form.text_area :content %>
   </div>
 
+  <div class="field">
+    <%= form.label :expired_at %>
+    <%= form.date_select :expired_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, ["未着手","着手中","完了"] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :priority %>
+    <%= form.select :priority, ["低","中","高"] %>
+  </div>
+
   <div class="actions">
-    <%= form.submit value='Submit' %>
+    <%= form.submit value='送信' %>
   </div>
 <% end %>
