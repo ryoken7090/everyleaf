@@ -30,15 +30,29 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context '検索をした場合' do
       before do
-        FactoryBot.create(:task, title: "task")
-        FactoryBot.create(:second_task, title: "sample")
+        FactoryBot.create(:task, title: "task", status: "完了")
+        FactoryBot.create(:second_task, title: "sample", status: "完了")
+        FactoryBot.create(:second_task, title: "着手中のタスクタイトル", status: "着手中")
       end
       it "タイトルで検索できる" do
         visit tasks_path
-        # タスクの検索欄に検索ワードを入力する (例: task)
-
-        # 検索ボタンを押す
-        expect(page).to have_content 'task'
+        fill_in 'タイトル検索', with: 'sample'
+        click_button '検索'
+        expect(page).to have_content 'sample'
+      end
+      it "ステータスで検索できる" do
+        visit tasks_path
+        select '完了', from: 'ステータスで検索'
+        click_button '検索'
+        expect(page).to have_content 'sample'
+      end
+      it "タイトルとステータスで検索できる" do
+        visit tasks_path
+        fill_in 'タイトル検索', with: 'タイトル'
+        select '着手中', from: 'ステータスで検索'
+        click_button '検索'
+        expect(page).to have_content '着手中のタスクタイトル'
+        expect(page).not_to have_content 'Factoryで作ったデフォルトのタイトル1'
       end
     end
   end
