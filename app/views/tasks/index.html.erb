@@ -12,7 +12,7 @@
   </div>
   <div class="field">
     <%= f.label :status, "ステータスで検索" %>
-    <%= f.select :status, [["未着手","yet"],["着手中","working"],["完了","completed"]], { include_blank: '選択なし' } %>
+    <%= f.select :status, ["未着手","着手中","完了"], { include_blank: '選択なし' } %>
   </div>
   <%= f.submit('検索')%>
 <% end %>
