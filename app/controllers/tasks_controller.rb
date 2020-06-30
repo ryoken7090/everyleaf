@@ -3,18 +3,17 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
+    @tasks = Task.all
     if params[:sort_expired]
-      @tasks = Task.all.order(expired_at: "ASC")
-    else
-      @tasks = Task.all.order(created_at: "DESC")
+      @tasks = @tasks.order(expired_at: "ASC")
     end
 
     if params[:title].present? && params[:status].present?
-      @tasks = Task.all.title_search(params[:title]).status_search(params[:status])
+      @tasks = @tasks.title_search(params[:title]).status_search(params[:status])
     elsif params[:title].present?
-      @tasks = Task.all.title_search(params[:title])
+      @tasks = @tasks.title_search(params[:title])
     elsif params[:status].present?
-      @tasks = Task.all.status_search(params[:status])
+      @tasks = @tasks.status_search(params[:status])
     end
   end
 
@@ -35,7 +34,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
-      redirect_to @task, notice: 'Task was successfully created.'
+      redirect_to @task, notice: 'タスクが生成されました'
     else
       render :new
     end
@@ -44,7 +43,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   def update
     if @task.update(task_params)
-      redirect_to @task, notice: 'Task was successfully updated.'
+      redirect_to @task, notice: '更新しました'
     else
       render :edit
     end
@@ -53,7 +52,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   def destroy
     @task.destroy
-    redirect_to tasks_url, notice: 'Task was successfully destroyed.'
+    redirect_to tasks_url, notice: 'タスクを消去しました'
   end
 
   private

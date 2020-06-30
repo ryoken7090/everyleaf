@@ -2,7 +2,7 @@
 
 <h1>Tasks</h1>
 <p><%= link_to '終了期限の近い順', tasks_path(sort_expired: "true") %></p>
-<p><%= link_to 'タスクの新しい順', tasks_path %></p>
+<p><%= link_to 'タスクの古い順', tasks_path %></p>
 
 <%= form_with(url: tasks_path, method: :get, local: true) do |f| %>
   <div class="field">
@@ -36,9 +36,9 @@
         <td><%= task.content %></td>
         <td><%= task.expired_at.strftime("%Y年%m月%d日") %></td>
         <td><%= task.status %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '詳細', task %></td>
+        <td><%= link_to '編集', edit_task_path(task) %></td>
+        <td><%= link_to '削除', task, method: :delete, data: { confirm: '消していいですか？' } %></td>
       </tr>
     <% end %>
   </tbody>
