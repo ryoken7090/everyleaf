@@ -56,4 +56,4 @@
 </table>
 <%= paginate @tasks %>
 <br>
-<%= link_to("新しいタスク", tasks_path(sort_priority: "true"), {class: "btn btn-secondary"}) %>
+<%= link_to("新しいタスク", new_task_path, {class: "btn btn-secondary"}) %>
