@@ -25,5 +25,10 @@
   <%= @task.priority %>
 </p>
 
+<p>
+  <strong>ユーザー名:</strong>
+  <%= @task.user.name %>
+</p>
+
 <%= link_to '編集', edit_task_path(@task) %> |
 <%= link_to '一覧', tasks_path %>
