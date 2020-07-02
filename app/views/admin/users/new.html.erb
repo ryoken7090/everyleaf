@@ -19,6 +19,6 @@
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %>
   <%= f.label :admin, "権限" %>
-  <%= f.select :admin, [["管理者", true],["一般ユーザー", false]] %>
+  <%= f.select :admin, ["管理者","一般ユーザー"] %>
   <%= f.submit "アカウント作成" %>
 <% end %>

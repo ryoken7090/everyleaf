@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :set_user, only: [:show]
+  before_action :set_user, only: [:show, :edit, :update]
   def index
     @users = User.all
   end
@@ -17,6 +17,19 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
+  end
+
+  def edit
+  end
+
+  def update
+    # binding.pry
+    if @user.update(user_params)
+
+      redirect_to admin_users_path, notice: '更新しました'
+    else
+      render :edit
+    end
   end
 
   private

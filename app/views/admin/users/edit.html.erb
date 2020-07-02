@@ -1,0 +1,15 @@
+<%= form_with(model: @user, url: admin_user_path, local: true) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :email %>
+  <%= f.email_field :email %>
+  <%= f.label :admin, "権限" %>
+  <%= f.select :admin, ["管理者", "一般ユーザー"] %>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %>
+  <%= f.submit "edit" %>
+<% end %>
+<%= link_to '詳細', @user %> |
+<%= link_to '一覧', admin_users_path %>
