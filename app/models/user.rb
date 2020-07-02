@@ -6,4 +6,5 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
   has_many :tasks
+  enum admin: { 管理者: true, 一般ユーザー: false }
 end
