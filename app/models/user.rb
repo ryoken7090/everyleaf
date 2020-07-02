@@ -5,6 +5,6 @@ class User < ApplicationRecord
   before_validation { email.downcase! }
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
   enum admin: { 管理者: true, 一般ユーザー: false }
 end

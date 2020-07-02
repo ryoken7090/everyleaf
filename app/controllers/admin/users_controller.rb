@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   def index
     @users = User.all
   end
@@ -25,11 +25,15 @@ class Admin::UsersController < ApplicationController
   def update
     # binding.pry
     if @user.update(user_params)
-
       redirect_to admin_users_path, notice: '更新しました'
     else
       render :edit
     end
+  end
+
+  def destroy
+    @user.destroy
+    redirect_to admin_users_path, notice: 'ユーザーを削除しました'
   end
 
   private
