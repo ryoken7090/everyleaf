@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
-
   def new
     @user = User.new
+    if current_user
+      redirect_to tasks_path, notice: 'ログイン状態で遷移できないページです'
+    end
   end
 
   def create
@@ -15,6 +17,10 @@ class UsersController < ApplicationController
   end
   def show
     @user = User.find(params[:id])
+    unless current_user == @user
+      redirect_to tasks_path, notice: '
+    他ユーザーのページには遷移できません'
+    end
   end
 
   private

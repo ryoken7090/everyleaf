@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
   def new
+    if logged_in?
+      redirect_to tasks_path, notice: 'ログイン中には遷移できません'
+    end
   end
 
   def create
