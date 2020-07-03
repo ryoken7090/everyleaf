@@ -24,3 +24,10 @@ User.create!(
   password_confirmation: "password",
   admin: true
 )
+User.create!(
+  email: "admin2@example.com",
+  name: "管理者2",
+  password: "password",
+  password_confirmation: "password",
+  admin: true
+)
