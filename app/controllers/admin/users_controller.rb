@@ -3,7 +3,6 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :admin_only
   def index
-    binding.pry
     @users = User.includes(:tasks).all
   end
 
@@ -19,7 +18,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
-    binding.pry
     @tasks = @user.tasks.page(params[:page]).per(10)
   end
 
