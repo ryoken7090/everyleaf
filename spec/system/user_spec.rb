@@ -18,9 +18,17 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
     end
   end
   describe 'セッション機能のテスト' do
+    before do
+      FactoryBot.create(:user, name:"sample1", email:"sample1@example.com", id:1)
+      FactoryBot.create(:user, name:"sample2", email:"sample2@example.com", id: 2)
+    end
     context 'ユーザのデータがありログインしていない場合' do
       it 'ユーザーログイン画面のテスト' do
-
+        visit new_session_path
+        fill_in 'Email', with: 'sample1@example.com'
+        fill_in 'Password', with: '00000000'
+        click_on 'ログイン'
+        expect(page).to have_content 'sample1のページ'
       end
     end
     context 'ログイン状態の時' do
