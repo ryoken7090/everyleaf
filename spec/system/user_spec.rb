@@ -87,7 +87,9 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
 
       end
       it 'ユーザーの詳細画面に遷移できる' do
-
+        visit admin_user_path(@general_user)
+        expect(current_path).to eq admin_user_path(@general_user)
+        expect(page).to have_content 'sampleのページ'
       end
       it 'ユーザーを編集できる' do
 
