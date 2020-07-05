@@ -92,10 +92,20 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         expect(page).to have_content 'sampleのページ'
       end
       it 'ユーザーを編集できる' do
-
+        visit admin_user_path(@general_user)
+        click_link 'ユーザー編集'
+        fill_in '名前', with: 'sample_edit'
+        fill_in 'メールアドレス', with: 'sample_edit@example.com'
+        fill_in 'パスワード', with: '00000000'
+        fill_in '確認用パスワード', with: '00000000'
+        click_on 'edit'
+        expect(current_path).to eq admin_users_path
+        expect(page).to have_content '更新しました'
+        click_link 'sample_edit'
+        expect(page).to have_content 'sample_edit@example.com'
       end
       it 'ユーザーの削除ができる' do
-
+      
       end
     end
   end
