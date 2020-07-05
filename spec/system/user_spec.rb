@@ -19,8 +19,8 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
   end
   describe 'セッション機能のテスト' do
     before do
-      FactoryBot.create(:user, name:"sample1", email:"sample1@example.com", id:1)
-      FactoryBot.create(:user, name:"sample2", email:"sample2@example.com", id: 2)
+      @user_one = FactoryBot.create(:user, name:"sample1", email:"sample1@example.com", id:1)
+      @user_two = FactoryBot.create(:user, name:"sample2", email:"sample2@example.com", id: 2)
     end
     context 'ユーザのデータがありログインしていない場合' do
       it 'ユーザーログイン画面のテスト' do
@@ -28,30 +28,60 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         fill_in 'Email', with: 'sample1@example.com'
         fill_in 'Password', with: '00000000'
         click_on 'ログイン'
-        expect(page).to have_content 'sample1のページ'
+        expect(current_path).to eq user_path(id: 1)
       end
     end
     context 'ログイン状態の時' do
+      before do
+        visit new_session_path
+        fill_in 'Email', with: 'sample1@example.com'
+        fill_in 'Password', with: '00000000'
+        click_on 'ログイン'
+      end
       it '自分のユーザー詳細画面に飛べること' do
-
+        visit user_path(@user_one)
+        expect(page).to have_content 'sample1のページ'
       end
       it '他人の詳細画面に飛ぶとタスク一覧ページに遷移すること' do
-
+        visit user_path(@user_two)
+        expect(current_path).to eq tasks_path
+        expect(page).to have_content '他ユーザーのページには遷移できません'
       end
       it 'ログアウトができること' do
-
+        click_link 'ログアウト'
+        expect(current_path).to eq new_session_path
       end
     end
   end
   describe '管理者画面のテスト' do
+    before do
+      @general_user = FactoryBot.create(:user)
+      @admin_user = FactoryBot.create(:admin_user)
+    end
     context '一般ユーザーでログインしている時' do
+      before do
+        visit new_session_path
+        fill_in 'Email', with: 'sample@example.com'
+        fill_in 'Password', with: '00000000'
+        click_on 'ログイン'
+      end
       it '管理者画面にアクセスできない' do
-
+        visit admin_users_path
+        expect(current_path).to eq tasks_path
+        expect(page).to have_content '一般ユーザーは管理者ページに入れません'
       end
     end
     context '管理者としてログインしている時' do
+      before do
+        visit new_session_path
+        fill_in 'Email', with: 'admin@example.com'
+        fill_in 'Password', with: '00000000'
+        click_on 'ログイン'
+      end
       it '管理画面にアクセスできる' do
-
+        visit admin_users_path
+        expect(current_path).to eq admin_users_path
+        expect(page).to have_content '管理者画面'
       end
       it 'ユーザーを新規登録できる' do
 
