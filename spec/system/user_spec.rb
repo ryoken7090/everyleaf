@@ -105,7 +105,11 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         expect(page).to have_content 'sample_edit@example.com'
       end
       it 'ユーザーの削除ができる' do
-      
+        visit admin_user_path(@general_user)
+        click_link 'ユーザー削除'
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content 'ユーザーを削除しました'
+        expect(page).not_to have_content 'sample'
       end
     end
   end
