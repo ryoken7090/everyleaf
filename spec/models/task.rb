@@ -9,7 +9,7 @@ RSpec.describe 'タスク管理機能', type: :model do
     expect(task).not_to be_valid
   end
   it 'titleとcontentに内容が記載されていればバリデーションが通る' do
-    task = Task.new(title: 'タイトル内容あり', content: 'コンテント内湯あり')
+    task = Task.new(title: 'タイトル内容あり', content: 'コンテント内容あり')
     expect(task).to be_valid
   end
   context 'scopeメソッドで検索をした場合' do
