@@ -6,17 +6,20 @@ class TagsController < ApplicationController
   def create
     @tag = Tag.new(tag_params)
     if @tag.save
-      redirect_to new_tag_path, notice: 'タスクが生成されました'
+      redirect_to new_task_path, notice: 'タグが生成されました'
     else
       render :new
     end
   end
 
   def index
+    @tags = Tag.all
   end
 
   def destroy
-
+    @tag = Tag.find(params[:id])
+    @tag.destroy
+    redirect_to new_task_path, notice: 'タグをを消去しました'
   end
 
   private
