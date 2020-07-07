@@ -1,10 +1,12 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user
 
   PER  = 10
   # GET /tasks
   def index
-    @tasks = Task.page(params[:page]).per(PER)
+    @tasks = current_user.tasks.page(params[:page]).per(PER)
+    # binding.pry
     if params[:sort_expired]
       @tasks = @tasks.order(expired_at: "ASC")
     end
@@ -33,11 +35,15 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    unless @task.user_id == current_user.id
+      redirect_to tasks_path, notice: "ほかのユーザーは編集できません"
+    end
   end
 
   # POST /tasks
   def create
     @task = Task.new(task_params)
+    @task.user_id = current_user.id
     if @task.save
       redirect_to @task, notice: 'タスクが生成されました'
     else

@@ -1,5 +1,14 @@
 class ApplicationController < ActionController::Base
   before_action :basic
+  protect_from_forgery with: :exception
+  include SessionsHelper
+  include AdminHelper
+
+  def authenticate_user
+    unless logged_in?
+      redirect_to new_session_path, notice: 'ログインしてください'
+    end
+  end
 
   private
   def basic

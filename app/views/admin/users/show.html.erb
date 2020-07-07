@@ -1,0 +1,29 @@
+<h1><%= @user.name %>のページ</h1>
+<p><%= @user.email %></p>
+<p><%= @user.admin %></p>
+<%= link_to 'ユーザー編集', edit_admin_user_path(@user) %>
+<%= link_to 'ユーザー削除', admin_user_path(@user),  method: :delete, data: { confirm: '消していいですか？' } %>
+<h3>タスク一覧</h3>
+<table>
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>内容</th>
+      <th>終了日時</th>
+      <th>ステータス</th>
+      <th>優先度</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr class="task_row">
+        <td><%= task.title %></td>
+        <td><%= task.content %></td>
+        <td><%= task.expired_at.strftime("%Y年%m月%d日") %></td>
+        <td><%= task.status %></td>
+        <td><%= task.priority %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @tasks %>

@@ -27,6 +27,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'database_cleaner'
 end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rails-i18n', '~> 5.1'
@@ -34,3 +35,4 @@ gem 'enum_help'
 gem 'kaminari', '~> 0.17.0'
 gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'
+gem 'bcrypt', '3.1.11'

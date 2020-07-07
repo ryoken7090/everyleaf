@@ -10,6 +10,18 @@
   </head>
 
   <body>
+    <% if logged_in? %>
+      <% if current_user.admin == "管理者" %>
+        <%= link_to "管理者画面", admin_users_path %>
+      <% end %>
+      <%= link_to "ログイン中：#{current_user.name}", user_path(current_user.id) %>
+      <%= link_to "タスク一覧", tasks_path %>
+      <%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
+    <% else %>
+      <%= link_to "サインアップ", new_user_path %>
+      <%= link_to "サインイン", new_session_path %>
+    <% end %>
+    <p id="notice"><%= notice %></p>
     <%= yield %>
   </body>
 </html>
