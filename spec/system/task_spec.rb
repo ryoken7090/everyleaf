@@ -1,8 +1,13 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   before do
-    FactoryBot.create(:task)
-    FactoryBot.create(:second_task)
+    @user = FactoryBot.create(:user)
+    FactoryBot.create(:task, user: @user)
+    FactoryBot.create(:second_task, user: @user)
+    visit new_session_path
+    fill_in 'Email', with: 'sample@example.com'
+    fill_in 'Password', with: '00000000'
+    click_on 'ログイン'
   end
   describe 'タスク一覧画面' do
     context 'タスクを作成した場合' do
@@ -13,7 +18,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context '複数のタスクを作成した場合' do
       it 'タスクが更新日時の古い順に並んでいる' do
-        FactoryBot.create(:task, title: 'new_task')
+        FactoryBot.create(:task, title: 'new_task', user: @user)
         visit tasks_path
         task_list = all('.task_row')
         expect(task_list[2]).to have_content 'new_task'
@@ -22,7 +27,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context '終了期限でソートするリンクを押した場合' do
       it '終了時刻の遅いタスクが後ろに並んでいる' do
-        FactoryBot.create(:task, expired_at: '2020-08-01')
+        FactoryBot.create(:task, expired_at: '2020-08-01', user: @user)
         visit tasks_path(sort_expired: "true")
         task_list = all('.task_row')
         expect(task_list[2]).to have_content '2020年08月01日'
@@ -30,9 +35,9 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context '検索をした場合' do
       before do
-        FactoryBot.create(:task, title: "task", status: "完了")
-        FactoryBot.create(:second_task, title: "sample", status: "完了")
-        FactoryBot.create(:second_task, title: "着手中のタスクタイトル", status: "着手中")
+        FactoryBot.create(:task, title: "task", status: "完了", user: @user)
+        FactoryBot.create(:second_task, title: "sample", status: "完了", user: @user)
+        FactoryBot.create(:second_task, title: "着手中のタスクタイトル", status: "着手中", user: @user)
       end
       it "タイトルで検索できる" do
         visit tasks_path
@@ -75,8 +80,8 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe 'タスク詳細画面' do
     context '任意のタスク詳細画面に遷移した場合' do
       it '該当タスクの内容が表示されたページに遷移する' do
-        FactoryBot.create(:task, content: 'target task')
-        5.times {FactoryBot.create(:task)}
+        FactoryBot.create(:task, content: 'target task', user: @user)
+        5.times {FactoryBot.create(:task, user: @user)}
         visit tasks_path
         all('tbody tr')[2].click_link '詳細'
         expect(page).to have_content 'target task'
