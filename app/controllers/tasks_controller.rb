@@ -31,6 +31,7 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+    @tags = Tag.all
   end
 
   # GET /tasks/1/edit
