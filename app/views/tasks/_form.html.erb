@@ -39,8 +39,12 @@
   <div class="field">
     <p>タグ一覧</p>
     <ul>
-      <% @tags.each do |tag| %>
+      <% Tag.all.each do |tag| %>
         <li><%= tag.title %></li>
+      <% end %>
+      <% Tag.all.each do |tag| %>
+      <%= form.check_box :tagging_tag_ids, { multiple: true, checked: tag[:checked], disabled: tag[:disabled], include_hidden: false }, tag[:id] %>
+      <%= tag.title %>
       <% end %>
     </ul>
     <%= link_to '新しいタグを生成する', new_tag_path %>

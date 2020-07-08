@@ -31,7 +31,6 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
-    @tags = Tag.all
   end
 
   # GET /tasks/1/edit
@@ -75,6 +74,6 @@ class TasksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:title, :content, :expired_at, :status, :priority)
+      params.require(:task).permit(:title, :content, :expired_at, :status, :priority, tagging_tag_ids: [])
     end
 end
