@@ -28,7 +28,14 @@
   <%= @task.user.name %>
 </p>
 <p>
-<%= @task.tagging_tags.pluck(:title) %>
+  <strong>つけられたタグ:</strong>
+  <% if @tags.present? %>
+    <% @tags.each do |tag| %>
+      <%= tag %>
+    <% end %>
+  <% else %>
+    なし
+  <% end %>
 </p>
 
 <%= link_to '編集', edit_task_path(@task) %> |

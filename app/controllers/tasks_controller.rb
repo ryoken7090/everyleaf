@@ -26,6 +26,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1
   def show
+    @tags = @task.tagging_tags.pluck(:title)
   end
 
   # GET /tasks/new
