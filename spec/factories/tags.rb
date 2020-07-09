@@ -1,5 +1,8 @@
 FactoryBot.define do
-  factory :tag do
-    title { "テストタグ" }
+  factory :first_tag, class: Tag do
+    title { "テストタグ(1)" }
+  end
+  factory :second_tag, class: Tag do
+    title { "テストタグ(2)" }
   end
 end
