@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  resources :tags, only: [:new, :create, :index, :destroy]
   namespace :admin do
     resources :users
   end
-  root to: 'tasks#index'
   resources :tasks
   resources :users, only: [:new, :create, :show]
   resources :sessions, only: [:new, :create, :destroy]

@@ -27,6 +27,16 @@
   <strong>ユーザー名:</strong>
   <%= @task.user.name %>
 </p>
+<p>
+  <strong>つけられたタグ:</strong>
+  <% if @tags.present? %>
+    <% @tags.each do |tag| %>
+      <%= tag %>
+    <% end %>
+  <% else %>
+    なし
+  <% end %>
+</p>
 
 <%= link_to '編集', edit_task_path(@task) %> |
 <%= link_to '一覧', tasks_path %>

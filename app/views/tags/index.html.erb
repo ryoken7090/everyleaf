@@ -1,0 +1,16 @@
+<table>
+  <thead>
+    <tr>
+      <th>タグ名</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr class="tag_row">
+        <td><%= tag.title %></td>
+        <td><%= link_to '削除', tag, method: :delete, data: { confirm: '消していいですか？' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -6,7 +6,6 @@ class TasksController < ApplicationController
   # GET /tasks
   def index
     @tasks = current_user.tasks.page(params[:page]).per(PER)
-    # binding.pry
     if params[:sort_expired]
       @tasks = @tasks.order(expired_at: "ASC")
     end
@@ -22,10 +21,16 @@ class TasksController < ApplicationController
     elsif params[:status].present?
       @tasks = @tasks.status_search(params[:status])
     end
+
+    if params[:tag_id].present?
+      search_tag = Tag.find(params[:tag_id])
+      @tasks = search_tag.tagging_tasks.page(params[:page]).per(PER)
+    end
   end
 
   # GET /tasks/1
   def show
+    @tags = @task.tagging_tags.pluck(:title)
   end
 
   # GET /tasks/new
@@ -74,6 +79,6 @@ class TasksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:title, :content, :expired_at, :status, :priority)
+      params.require(:task).permit(:title, :content, :expired_at, :status, :priority, tagging_tag_ids: [])
     end
 end

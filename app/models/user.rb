@@ -11,9 +11,7 @@ class User < ApplicationRecord
 
   def check_admin_existence
     if self.admin == "管理者"
-      # binding.pry
       if User.where(admin: "管理者").count == 1
-        # binding.pry
         throw :abort, notice: '少なくとも1つ、管理者アカウントが必要です'
       end
     end

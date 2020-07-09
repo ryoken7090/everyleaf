@@ -62,7 +62,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
   end
   describe 'タスク登録画面' do
-    context '必要項目を入力して、createボタンを押した場合' do
+    context '必要項目を入力して、送信ボタンを押した場合' do
       it 'データが保存される' do
         visit new_task_path
         fill_in 'タイトル', with: '入力したタイトル'
@@ -73,7 +73,6 @@ RSpec.describe 'タスク管理機能', type: :system do
         click_button '送信'
         expect(page).to have_content '入力したタイトル'
         expect(page).to have_content '2020年09月01日'
-
       end
     end
   end

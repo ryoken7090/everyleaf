@@ -36,6 +36,20 @@
     <%= form.select :priority, ["低","中","高"] %>
   </div>
 
+  <div class="field">
+    <p>タグ一覧</p>
+    <ul>
+      <% Tag.all.each do |tag| %>
+        <li>
+          <%= form.label :tagging_tag_ids, tag.title %>
+          <%= form.check_box :tagging_tag_ids, { multiple: true, checked: tag[:checked], disabled: tag[:disabled], include_hidden: false }, tag[:id] %>
+        </li>
+      <% end %>
+    </ul>
+    <%= link_to '新しいタグを生成する', new_tag_path %>
+    <%= link_to 'タグを削除する', tags_path %>
+  </div>
+
   <div class="actions">
     <%= form.submit value='送信' %>
   </div>
