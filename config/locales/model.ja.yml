@@ -3,6 +3,7 @@ ja:
     models:
       task: タスク
       user: ユーザー
+      tag: タグ
     attributes:
       task:
         title: タイトル
@@ -15,3 +16,5 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: 確認用パスワード
+      tag:
+        title: タグ名

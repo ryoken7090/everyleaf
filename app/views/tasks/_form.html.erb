@@ -40,8 +40,9 @@
     <p>タグ一覧</p>
     <ul>
       <% Tag.all.each do |tag| %>
-        <li><%= form.check_box :tagging_tag_ids, { multiple: true, checked: tag[:checked], disabled: tag[:disabled], include_hidden: false }, tag[:id] %>
+        <li>
           <%= tag.title %>
+          <%= form.check_box :tagging_tag_ids, { multiple: true, checked: tag[:checked], disabled: tag[:disabled], include_hidden: false }, tag[:id] %>
         </li>
       <% end %>
     </ul>

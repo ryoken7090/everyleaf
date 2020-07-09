@@ -24,6 +24,16 @@
 <% end %>
 </form>
 
+<form class="form-inline">
+<%= form_with(url: tasks_path, method: :get, local: true) do |f| %>
+  <div class="form-group m-2">
+    <%= f.label :tag_id, "タグで検索" %>
+    <%= f.collection_select :tag_id, Tag.all, :id, :title, { include_blank: '選択なし' } %>
+  </div>
+  <%= f.submit 'タグ検索', class: "btn btn-secondary" %>
+<% end %>
+</form>
+
 <table>
   <thead>
     <tr>
@@ -48,7 +58,7 @@
         <td><%= task.user.name %></td>
         <td>
           <% task.tagging_tags.each do |tag| %>
-            <%= tag.title %> 
+            <%= tag.title %>
           <% end %>
         </td>
         <td><%= link_to '詳細', task %></td>

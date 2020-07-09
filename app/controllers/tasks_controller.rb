@@ -6,7 +6,6 @@ class TasksController < ApplicationController
   # GET /tasks
   def index
     @tasks = current_user.tasks.page(params[:page]).per(PER)
-    # binding.pry
     if params[:sort_expired]
       @tasks = @tasks.order(expired_at: "ASC")
     end
@@ -21,6 +20,11 @@ class TasksController < ApplicationController
       @tasks = @tasks.title_search(params[:title])
     elsif params[:status].present?
       @tasks = @tasks.status_search(params[:status])
+    end
+
+    if params[:tag_id].present?
+      search_tag = Tag.find(params[:tag_id])
+      @tasks = search_tag.tagging_tasks.page(params[:page]).per(PER)
     end
   end
 
